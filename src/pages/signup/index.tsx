@@ -47,7 +47,7 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>,userInfo:UserSign
 const handleGoogleSignIn=async(e:React.MouseEvent<HTMLButtonElement>)=>{
   e.preventDefault();
   try {
-    const provider = new GoogleAuthProvider();
+    //const provider = new GoogleAuthProvider();
     const result = await googleSignIn();
     console.log(result)
     console.log("Google Sign-In Success:", result.user);

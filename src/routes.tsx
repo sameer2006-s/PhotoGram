@@ -8,6 +8,7 @@ import Home from './pages/home'
 import Post from './pages/post'
 import ProtectedRoutes from './Components/ProtectedRoutes'
 import ErrorBoundary from "./ErrorBoundary";
+import  Layout  from "./Components/layout";
 
 
 
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
     {
         path:"/signup",
         element:<Signup/>,
+        errorElement:<Error/>
+    },
+    {
+        path:"/layout",
+        element:<Layout/>,
         errorElement:<Error/>
     },
     
