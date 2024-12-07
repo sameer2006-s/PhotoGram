@@ -12,6 +12,7 @@ const Home : React.FunctionComponent <IHomeProps> = (props)=>{
         <button onClick={()=>
             logOut()
         }></button>
+        hellooo
     </div>;
 }
 

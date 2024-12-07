@@ -6,7 +6,7 @@ import Myphotos from './pages/myphotos'
 import Profile from './pages/profile'
 import Home from './pages/home'
 import Post from './pages/post'
-import ProtectedRoutes from './Components/ui/ProtectedRoutes'
+import ProtectedRoutes from './Components/ProtectedRoutes'
 import ErrorBoundary from "./ErrorBoundary";
 
 
