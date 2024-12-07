@@ -6,16 +6,19 @@ import { Input } from '../../Components/ui/input';
 //import { Icons } from '../../Components/ui/icons';
 import { UserSignIn } from '../../types';
 import { useUserAuth } from '../../context/userAuthContext';
+import { Icons } from '../../Components/ui/icons';
 //import { userInfo } from 'os';
+import { Link,useNavigate } from 'react-router-dom';
 
 
 
-//const {logIn,signUp,googleSignIn}= useUserAuth()
 
 interface ISignupProps  {}
 
 
 const Signup : React.FunctionComponent <ISignupProps> = ()=>{
+
+  const {logIn,signUp,googleSignIn}= useUserAuth()
 
 
   const initialValue:UserSignIn ={
@@ -24,12 +27,15 @@ const Signup : React.FunctionComponent <ISignupProps> = ()=>{
     confirmPassword:""
 }
 
+const navigate = useNavigate();
 
-
-const handleSubmit=/*async*/(e:React.MouseEvent<HTMLButtonElement>)=>{
+const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
   e.preventDefault();
   try {
-    console.log(userInfo);
+    console.log("User info before sign-up:", userInfo);
+    const cred = await signUp(userInfo.email, userInfo.password);
+    console.log("User created successfully:", cred);
+    console.log("User info after sign-up:", userInfo);
   } catch (error) {
     console.log(error);
   }
@@ -37,7 +43,8 @@ const handleSubmit=/*async*/(e:React.MouseEvent<HTMLButtonElement>)=>{
 const handleGoogleSignIn=async(e:React.MouseEvent<HTMLButtonElement>,userInfo:UserSignIn)=>{
   e.preventDefault();
   try {
-    console.log(userInfo);
+    await googleSignIn();
+    navigate("/");
   } catch (error) {
     console.log(error);
   }
@@ -55,11 +62,11 @@ const handleGoogleSignIn=async(e:React.MouseEvent<HTMLButtonElement>,userInfo:Us
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-2 gap-6">
           <Button variant="outline">
-            {/* <Icons.gitHub className="mr-2 h-4 w-4" /> */}
+             <Icons.gitHub className="mr-2 h-4 w-4" /> 
             Github
           </Button>
           <Button variant="outline" onClick={e=>handleGoogleSignIn(e,userInfo)}>
-            {/* <Icons.google className="mr-2 h-4 w-4" /> */}
+             <Icons.google className="mr-2 h-4 w-4" /> 
             Google
           </Button>
         </div>
@@ -90,7 +97,7 @@ const handleGoogleSignIn=async(e:React.MouseEvent<HTMLButtonElement>,userInfo:Us
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full" onClick={e=>handleSubmit}>Create account</Button>
+        <Button className="w-full" onClick={handleSubmit}>Create account</Button>
       </CardFooter>
     </Card>
     </div>;
