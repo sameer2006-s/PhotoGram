@@ -9,6 +9,7 @@ import Post from './pages/post'
 import ProtectedRoutes from './Components/ProtectedRoutes'
 import ErrorBoundary from "./ErrorBoundary";
 import  Layout  from "./Components/layout";
+import CreatePost from "./pages/post";
 
 
 
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         children:[
             {
                 path:"/post",
-                element:<Post/>,
+                element:<CreatePost/>,
                 errorElement:<Error/>
             },
             {
