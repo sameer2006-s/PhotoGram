@@ -1,18 +1,18 @@
 import * as React from 'react'
-import { useUserAuth } from '../../context/userAuthContext';
+//import { useUserAuth } from '../../context/userAuthContext';
+import Layout from '../../Components/layout';
 
 interface IHomeProps  {
 
 }
 
-const Home : React.FunctionComponent <IHomeProps> = (props)=>{
-    const {logOut}= useUserAuth()
+const Home : React.FunctionComponent <IHomeProps> = ()=>{
+   // const {logOut}= useUserAuth()
 
     return <div>
-        <button onClick={()=>
-            logOut()
-        }></button>
-        hellooo
+        <Layout>
+            Home
+        </Layout>
     </div>;
 }
 
