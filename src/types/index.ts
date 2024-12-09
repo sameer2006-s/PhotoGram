@@ -26,3 +26,13 @@ export interface FileEntry {
     type: string; // MIME type
     url: string; // URL of the file
 }
+
+export interface DocRes {
+    id:string,
+    caption:string;
+    photos:PhotoMeta[];
+    likes:number,
+    userLikes:[],
+    userId:string|null,
+    date:Date,
+}
