@@ -22,19 +22,7 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
 
     const renderPosts = () => {
         console.log(data[0])
-        // const fetchEmail = async () => {
-        //     try {
-        //       const response = await fetch(`http://localhost:5176/get-email/${data[1].userId}`);
-        //       if (response.ok) {
-        //         const data = await response.json();
-        //         setEmail(data.email);
-        //       } else {
-        //         console.error('Failed to fetch email.');
-        //       }
-        //     } catch (error) {
-        //       console.error('Error:', error);
-        //     }
-        //   };
+        
         return (
           <div className="flex flex-col items-center justify-center w-full">
             {data.map((post) => (
@@ -65,6 +53,8 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
 
                     console.log("resObj:",resObj)
                     tempArr.push(resObj)
+
+                    
                 })
             }
 
