@@ -22,3 +22,25 @@ const Layout :React.FunctionComponent<ILayoutProps>=({children})=> {
 }
 
 export default Layout
+// const Layout: React.FunctionComponent<ILayoutProps> = ({ children }) => {
+//     return (
+//       <div className="flex bg-white min-h-screen">
+//         {/* Sidebar */}
+//         <aside className="bg-gray-800 fixed top-0 left-0 z-40 lg:w-40 h-screen">
+//           <SideBar />
+//         </aside>
+  
+//         {/* Main Content */}
+//         <div className="flex-1 flex justify-center items-center p-6">
+//           {children}
+//         </div>
+  
+//         {/* Right Sidebar */}
+//         <aside className="hidden lg:block bg-gray-800 fixed top-0 right-0 z-40 lg:w-60 h-screen">
+//           <UserList />
+//         </aside>
+//       </div>
+//     );
+//   };
+  
+//   export default Layout;

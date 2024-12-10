@@ -27,6 +27,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+
+
+// Export admin for use in other parts of your server
 //const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);

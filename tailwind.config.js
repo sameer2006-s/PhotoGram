@@ -8,6 +8,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],  theme: {
   	extend: {
+		display : ["group-hover"],
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
