@@ -8,6 +8,7 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
 import { HeartIcon, MessageCircle, ShareIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { updateLikesOnPost } from '../../repository/post.service';
 
 
 interface IPostCardProps {
@@ -16,8 +17,27 @@ interface IPostCardProps {
 
 const PostCard:React.FunctionComponent<IPostCardProps> = ({data})=>{
     const {user} = useUserAuth()
-     
+    const [likesInfo,setLikesInfo] = React.useState<{
+        likes:number,
+        isLike:boolean
+    }>({
+        likes:data.likes,
+        isLike: data.userLikes.includes(user?.uid)? true :false
+    })
 
+    const updateLike = async (isVal:boolean)=>{
+        setLikesInfo ({
+            likes: isVal ?likesInfo.likes +1:likesInfo.likes -1,
+            isLike:!likesInfo.isLike
+        })
+        if(isVal){
+            data.userLikes?.push(user?.uid)
+        }else{
+            data.userLikes?.splice(data.userLikes.indexOf(user!.uid))
+
+        }
+        await updateLikesOnPost(data.id,data.userLikes,isVal?likesInfo.likes +1:likesInfo.likes -1)
+    }
 
     return <Card className="mb-6">
     <CardHeader className='flex flex-col p-3 '>
@@ -33,13 +53,13 @@ const PostCard:React.FunctionComponent<IPostCardProps> = ({data})=>{
     </CardContent>
     <CardFooter className='flex flex-col p-3'>
       <div className='flex justify-between w-full mb-3'>
-          <HeartIcon className={cn("mr-3","cursor-pointer")}/>
+          <HeartIcon className={cn("mr-3","cursor-pointer",likesInfo.isLike?"fill-red-500":"")} onClick={()=>updateLike(!likesInfo.isLike)}/>
           <MessageCircle className='mr-3'/>
           </div>
           
-          <div className='w-full text-sm block'>{0} Likes</div>
+          <div className='w-full text-sm block'>{likesInfo.likes} Likes</div>
           <div className='w-full text-sm block'>
-              <span>Guest User : </span>
+              <span>Guest User : {data.caption}</span>
           
       </div>
     </CardFooter>

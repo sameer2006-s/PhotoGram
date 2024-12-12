@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Post } from "../types";
 
@@ -23,4 +23,12 @@ export const getPost = (id:string)=>{
 }
 export const deletePost = (id:string)=>{
     return deleteDoc(doc(collection(db,COLLECTION_NAME,id)))
+}
+
+export const updateLikesOnPost =(id:string,userLikes:string[],likes:number)=>{
+    const docRef=doc(db,COLLECTION_NAME,id)
+    return updateDoc(docRef,{
+        userLikes:userLikes,
+        likes:likes
+    })
 }
