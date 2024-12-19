@@ -3,7 +3,7 @@
   "files": [],  // Not necessary if you're using the 'include' pattern
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.app.json" //hii
     },
     {
       "path": "./tsconfig.node.json"
