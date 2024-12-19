@@ -23,7 +23,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "declaration": true
   },
   
 }
