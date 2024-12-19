@@ -22,7 +22,7 @@ const PostCard:React.FunctionComponent<IPostCardProps> = ({data})=>{
         isLike:boolean
     }>({
         likes:data.likes,
-        isLike: data.userLikes.includes(user?.uid)? true :false
+        isLike: data.userLikes?.includes(user?.uid)? true :false
     })
 
     const updateLike = async (isVal:boolean)=>{
@@ -33,10 +33,10 @@ const PostCard:React.FunctionComponent<IPostCardProps> = ({data})=>{
         if(isVal){
             data.userLikes?.push(user?.uid)
         }else{
-            data.userLikes?.splice(data.userLikes.indexOf(user!.uid))
+            data.userLikes?.splice(data.userLikes.indexOf(user!.uid),1)
 
         }
-        await updateLikesOnPost(data.id,data.userLikes,isVal?likesInfo.likes +1:likesInfo.likes -1)
+        await updateLikesOnPost(data.id!,data.userLikes!,isVal?likesInfo.likes +1:likesInfo.likes -1)
     }
 
     return <Card className="mb-6">
