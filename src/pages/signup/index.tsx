@@ -112,7 +112,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
             Create account
           </Button>
           <div className="mt-4 flex justify-between">
-            <Link to="/login" className="text-sm text-blue-500">
+            <Link to="/PhotoGram/src/pages/login" className="text-sm text-blue-500">
               Already have an account? Log in
             </Link>
           </div>

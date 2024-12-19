@@ -118,7 +118,7 @@ const Login : React.FunctionComponent <ILoginProps> = (props)=>{
       </Button>
       
       <div className="mt-4 flex justify-between">
-        <Link to="/signup" className="text-sm text-blue-500">
+        <Link to="/PhotoGram/src/pages/signup" className="text-sm text-blue-500">
           Don’t have an account? Sign up
         </Link>
       </div>
