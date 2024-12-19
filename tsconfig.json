@@ -13,8 +13,6 @@
     "baseUrl": ".",
     "paths": {
       // "@/*": ["src/*"],
-      "@/lib/*": ["lib/*"],
-
       "@pages/*": ["src/pages/*"]
     },
     "noUnusedParameters": true,
@@ -26,7 +24,6 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "noUnusedLocals": false
-
   },
   
 }
