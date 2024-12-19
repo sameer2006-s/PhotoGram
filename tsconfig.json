@@ -1,30 +1,30 @@
 {
-  "include": ["src/**/*", "vite.config.ts"],  // Ensure 'vite.config.ts' is included for type definitions
-  "files": [],  // Not necessary if you're using the 'include' pattern
+  "include": ["src/**/*", "vite.config.ts"],  // Include all TypeScript files and Vite config
+  "files": [],  // No need for this unless specific references to certain files
   "references": [
     {
-      "path": "./tsconfig.app.json" //hii
+      "path": "./tsconfig.app.json"  // Include app-specific TypeScript config
     },
     {
-      "path": "./tsconfig.node.json"
+      "path": "./tsconfig.node.json"  // Include node-specific TypeScript config
     }
   ],
   "compilerOptions": {
     "baseUrl": ".",  // Base URL for module resolution
     "paths": {
-      "@/*": ["src/*"],  // Map the @ alias to the src directory
-      "@pages/*": ["src/pages/*"]  // Useful alias for pages
+      "@/*": ["src/*"],  // Alias for resolving source directory
+      "@pages/*": ["src/pages/*"]  // Alias for easier page routing resolution
     },
     "noUnusedParameters": true,  // Enforce unused parameter checks
     "noImplicitAny": false,  // Allow implicit any types
-    "noImplicitReturns": false,  // Allow functions without explicit return
+    "noImplicitReturns": false,  // Allow functions without explicit returns
     "strict": true,  // Enable strict mode for better type safety
     "skipLibCheck": true,  // Skip library checks for external types
-    "esModuleInterop": true,  // Enable interoperability between ES modules and CommonJS
+    "esModuleInterop": true,  // Enable ES module interop with CommonJS
     "forceConsistentCasingInFileNames": true,  // Ensure file name casing consistency
-    "allowJs": true,  // Allow JavaScript files to be used alongside TypeScript
+    "allowJs": true,  // Allow JavaScript files alongside TypeScript
     "noUnusedLocals": false,  // Allow unused local variables
-    "declaration": true,  // Generate type declaration files
-    "outDir": "./dist"  // Optional: specify output directory
+    "declaration": true,  // Enable generation of TypeScript declaration files
+    "outDir": "./dist"  // Directory where build outputs will be stored
   }
 }
