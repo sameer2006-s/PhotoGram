@@ -1,6 +1,6 @@
 {
-  "include": ["src/**/*", "vite.config.ts"],
-  "files": [],
+  "include": ["src/**/*", "vite.config.ts"],  // Include all source files and config
+  "files": [],  // Not needed if you're using the `include` pattern
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -10,23 +10,22 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".",  // Resolve modules from the current directory
     "paths": {
-      // "@/*": ["src/*"],
-      "@/lib/*": ["lib/*"],
-
-      "@pages/*": ["src/pages/*"]
+      "@/*": ["src/*"],  // Map @ alias to src for easier imports
+      "@/lib/*": ["lib/*"],  // This alias is consistent with your setup
+      "@pages/*": ["src/pages/*"]  // Another useful alias
     },
-    "noUnusedParameters": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "strict": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true,
-    "noUnusedLocals": false
-
-  },
-  
+    "noUnusedParameters": true,  // To ensure unused function parameters are flagged
+    "noImplicitAny": false,  // Set to false if you need to allow implicit any
+    "noImplicitReturns": false,  // Set to false if needed
+    "strict": true,  // Recommended to enable strict mode for type safety
+    "skipLibCheck": true,  // Skip library checks for compatibility
+    "esModuleInterop": true,  // Enables interoperability between ES modules and CommonJS
+    "forceConsistentCasingInFileNames": true,  // Ensure consistency in filenames
+    "allowJs": true,  // Allow JavaScript files in TypeScript projects
+    "noUnusedLocals": false,  // Adjust based on your needs
+    "outDir": "./dist",  // Optional: specify the output directory
+    "declaration": true  // Optional: Generate `.d.ts` files
+  }
 }
