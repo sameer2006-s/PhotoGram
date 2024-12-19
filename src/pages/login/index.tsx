@@ -7,7 +7,7 @@ import { Input } from '../../Components/ui/input';
 import { UserSignIn } from '../../types';
 import { useUserAuth } from '../../context/userAuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface ILoginProps  {
 
@@ -116,12 +116,6 @@ const Login : React.FunctionComponent <ILoginProps> = (props)=>{
       <Button className="w-full" onClick={handleLogIn}>
         Log In
       </Button>
-      
-      <div className="mt-4 flex justify-between">
-        <Link to="/PhotoGram/src/pages/signup" className="text-sm text-blue-500">
-          Don’t have an account? Sign up
-        </Link>
-      </div>
     </CardFooter>
   </Card>
 </div>
