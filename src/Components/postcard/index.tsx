@@ -76,7 +76,6 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                 <div className="w-full text-sm block">
                     <span>Guest User: {data.caption}</span>
                 </div>
-               
             </CardFooter>
         </Card>
     );

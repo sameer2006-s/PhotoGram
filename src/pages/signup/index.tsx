@@ -135,7 +135,6 @@ return(
             <Button className="w-full" onClick={(e)=>handleSubmit(e,userInfo)}>
               Create account
             </Button>
-            <div><a href='/PhotoGram/src/pages/login'>Login</a></div>
           </CardFooter>
         </Card>
       </div>

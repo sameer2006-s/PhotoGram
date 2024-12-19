@@ -116,7 +116,6 @@ const Login : React.FunctionComponent <ILoginProps> = (props)=>{
       <Button className="w-full" onClick={handleLogIn}>
         Log In
       </Button>
-
     </CardFooter>
   </Card>
 </div>
