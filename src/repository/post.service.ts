@@ -25,10 +25,10 @@ export const deletePost = (id:string)=>{
     return deleteDoc(doc(collection(db,COLLECTION_NAME,id)))
 }
 
-export const updateLikesOnPost =(id:string,userLikes:string[],likes:number)=>{
-    const docRef=doc(db,COLLECTION_NAME,id)
-    return updateDoc(docRef,{
-        userLikes:userLikes,
-        likes:likes
+export const updateLikesOnPost = (id: string, userLikes: string[], likes: number): Promise<void> => {
+    const docRef = doc(db, COLLECTION_NAME, id)
+    return updateDoc(docRef, {
+        userLikes: userLikes,
+        likes: likes
     })
 }

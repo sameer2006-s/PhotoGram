@@ -13,33 +13,40 @@ interface IPostCardProps {
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const { user } = useUserAuth();
     const userId: string = user?.uid ?? ''; // Safely handle null or undefined
+    const userLikes: string[] = data.userLikes ?? [];
 
     const [likesInfo, setLikesInfo] = React.useState<{
         likes: number;
         isLike: boolean;
     }>({
-        likes: data.likes,
-        isLike: data.userLikes?.includes(userId) ?? false,
+        likes: data.likes ?? 0, // Ensure default value is handled
+        isLike: Array.isArray(userLikes) ? !userLikes.includes(userId as string) : false, // Cast userId to string
     });
+    
 
     const updateLike = async (isVal: boolean) => {
         setLikesInfo({
             likes: isVal ? likesInfo.likes + 1 : likesInfo.likes - 1,
             isLike: !likesInfo.isLike,
         });
-
+    
+        // Explicitly define userLikes as string array
+        const userLikes: string[] = data.userLikes ?? [];
+    
         if (isVal) {
-            if (!data.userLikes?.includes(userId)) {
-                data.userLikes?.push(userId);
+            if (!userLikes.includes(userId)) {
+                userLikes.push(userId); // Ensure userLikes is an array of strings
             }
         } else {
-            if (data.userLikes?.includes(userId)) {
-                data.userLikes?.splice(data.userLikes.indexOf(userId), 1);
+            if (userLikes.includes(userId)) {
+                userLikes.splice(userLikes.indexOf(userId), 1);
             }
         }
-
-        await updateLikesOnPost(data.id!, data.userLikes!, isVal ? likesInfo.likes + 1 : likesInfo.likes - 1);
+    
+        await updateLikesOnPost(data.id, userLikes, isVal ? likesInfo.likes + 1 : likesInfo.likes - 1);
     };
+    
+    
 
     return (
         <Card className="mb-6">

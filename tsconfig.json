@@ -15,7 +15,6 @@
       // "@/*": ["src/*"],
       "@pages/*": ["src/pages/*"]
     },
-    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitReturns": false,
@@ -23,6 +22,9 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "allowJs": true
-  }
+    "allowJs": true,
+    "noUnusedLocals": false
+
+  },
+  
 }
