@@ -1,6 +1,6 @@
 {
-  "include": ["src/**/*", "vite.config.ts"],
-  "files": [],
+  "include": ["src/**/*", "vite.config.ts"],  // Ensure 'vite.config.ts' is included for type definitions
+  "files": [],  // Not necessary if you're using the 'include' pattern
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -10,20 +10,21 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".",  // Base URL for module resolution
     "paths": {
-      // "@/*": ["src/*"],
-      "@pages/*": ["src/pages/*"]
+      "@/*": ["src/*"],  // Map the @ alias to the src directory
+      "@pages/*": ["src/pages/*"]  // Useful alias for pages
     },
-    "noUnusedParameters": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "strict": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true,
-    "noUnusedLocals": false
-  },
-  
+    "noUnusedParameters": true,  // Enforce unused parameter checks
+    "noImplicitAny": false,  // Allow implicit any types
+    "noImplicitReturns": false,  // Allow functions without explicit return
+    "strict": true,  // Enable strict mode for better type safety
+    "skipLibCheck": true,  // Skip library checks for external types
+    "esModuleInterop": true,  // Enable interoperability between ES modules and CommonJS
+    "forceConsistentCasingInFileNames": true,  // Ensure file name casing consistency
+    "allowJs": true,  // Allow JavaScript files to be used alongside TypeScript
+    "noUnusedLocals": false,  // Allow unused local variables
+    "declaration": true,  // Generate type declaration files
+    "outDir": "./dist"  // Optional: specify output directory
+  }
 }
