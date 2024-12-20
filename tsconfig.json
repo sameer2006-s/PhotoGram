@@ -1,6 +1,30 @@
 {
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pages/*": ["src/pages/*"]
+    },
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true
+  },
   "include": ["src", "vite.config.ts"],
-  "files": [],
+  "exclude": ["node_modules", "dist"],
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -8,23 +32,5 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      // "@/*": ["src/*"],
-      "@pages/*": ["src/pages/*"]
-    },
-    "noUnusedParameters": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "strict": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true,
-    "noUnusedLocals": false,
-    "declaration": true
-  },
-  
+  ]
 }
