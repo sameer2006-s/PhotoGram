@@ -25,3 +25,10 @@ export const updateLikesOnPost = (id, userLikes, likes) => {
         likes: likes
     });
 };
+
+export const getUserLikes = async (userId) => {
+    const q = query(collection(db, COLLECTION_NAME), where('userLikes', 'array-contains', userId));
+    const querySnapshot = await getDocs(q);
+    const likedPosts = querySnapshot.docs.map((doc) => doc.id); // Return post IDs where the user has liked
+    return likedPosts;
+};

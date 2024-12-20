@@ -32,3 +32,10 @@ export const updateLikesOnPost = (id: string, userLikes: string[], likes: number
         likes: likes
     })
 }
+
+export const getUserLikes = async (userId: string): Promise<string[]> => {
+    const q = query(collection(db, COLLECTION_NAME), where('userLikes', 'array-contains', userId));
+    const querySnapshot = await getDocs(q);
+    const likedPosts = querySnapshot.docs.map((doc) => doc.id);
+    return likedPosts; // Returns an array of post IDs that the user has liked
+};

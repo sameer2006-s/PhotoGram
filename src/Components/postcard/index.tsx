@@ -4,7 +4,7 @@ import { useUserAuth } from '../../context/userAuthContext';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { HeartIcon, MessageCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { updateLikesOnPost } from '../../repository/post.service';
+import { getUserLikes, updateLikesOnPost } from '../../repository/post.service';
 
 interface IPostCardProps {
     data: DocRes;
@@ -13,7 +13,7 @@ interface IPostCardProps {
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const { user } = useUserAuth();
     const userId: string = user?.uid ?? ''; // Safely handle null or undefined
-    const userLikes: string[] = data.userLikes || []; // Ensure default is an empty array
+    const [userLikes, setUserLikes] = React.useState<string[]>(data.userLikes || []); // Initial userLikes from data
     
     const [likesInfo, setLikesInfo] = React.useState<{
         likes: number;
@@ -23,18 +23,37 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
         isLike: userLikes.includes(userId), // Check if the user has already liked
     });
 
+    React.useEffect(() => {
+        if (user?.uid) {
+            const fetchUserLikes = async () => {
+                const likes = await getUserLikes(userId); // Fetch the user's liked posts
+                setUserLikes(likes);  // Update the userLikes state
+                
+                // Check and update likesInfo based on the fetched user likes
+                setLikesInfo({
+                    likes: data.likes ?? 0,
+                    isLike: likes.includes(userId), // Reset isLike based on current user
+                });
+            };
+            fetchUserLikes(); // Call the fetchUserLikes function
+        }
+    }, [user, userId, data.likes]); // Dependencies
+
     const updateLike = async (isVal: boolean) => {
         const updatedLikes = isVal ? likesInfo.likes + 1 : likesInfo.likes - 1;
         
+        // Filter out the current user from userLikes if not liking
+        const updatedUserLikes = isVal
+            ? [...new Set([...userLikes, userId])]  // Ensure uniqueness
+            : userLikes.filter((id) => id !== userId);  // Remove user if unlike
+        
         setLikesInfo({
             likes: updatedLikes,
-            isLike: !likesInfo.isLike, // Toggle like state
+            isLike: !likesInfo.isLike,  // Toggle like state
         });
-
-        const updatedUserLikes = isVal
-            ? [...userLikes, userId]
-            : userLikes.filter((id) => id !== userId);
-
+    
+        setUserLikes(updatedUserLikes);  // Update userLikes state
+        
         await updateLikesOnPost(data.id, updatedUserLikes, updatedLikes);
     };
 
