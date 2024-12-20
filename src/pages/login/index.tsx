@@ -117,7 +117,7 @@ const Login : React.FunctionComponent <ILoginProps> = (props)=>{
         Log In
       </Button>
       <Button className="w-full" onClick={() => navigate("/signUp")}>
-        Sign Up
+        Sign Upp
       </Button>
     </CardFooter>
   </Card>
