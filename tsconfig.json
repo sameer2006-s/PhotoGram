@@ -12,11 +12,11 @@
     "noImplicitReturns": false,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@pages/*": ["src/pages/*"]
-    },
+    // "baseUrl": ".",
+    // "paths": {
+    //  "@/*": ["src/*"],
+    //  "@pages/*": ["src/pages/*"]
+    // },
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
