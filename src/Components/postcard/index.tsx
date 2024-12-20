@@ -13,40 +13,30 @@ interface IPostCardProps {
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const { user } = useUserAuth();
     const userId: string = user?.uid ?? ''; // Safely handle null or undefined
-    const userLikes: string[] = data.userLikes ?? [];
-
+    const userLikes: string[] = data.userLikes || []; // Ensure default is an empty array
+    
     const [likesInfo, setLikesInfo] = React.useState<{
         likes: number;
         isLike: boolean;
     }>({
         likes: data.likes ?? 0, // Ensure default value is handled
-        isLike: Array.isArray(userLikes) ? !userLikes.includes(userId as string) : false, // Cast userId to string
+        isLike: userLikes.includes(userId), // Check if the user has already liked
     });
-    
 
     const updateLike = async (isVal: boolean) => {
+        const updatedLikes = isVal ? likesInfo.likes + 1 : likesInfo.likes - 1;
+        
         setLikesInfo({
-            likes: isVal ? likesInfo.likes + 1 : likesInfo.likes - 1,
-            isLike: likesInfo.isLike,
+            likes: updatedLikes,
+            isLike: !likesInfo.isLike, // Toggle like state
         });
-    
-        // Explicitly define userLikes as string array
-        const userLikes: string[] = data.userLikes ?? [];
-    
-        if (isVal) {
-            if (!userLikes.includes(userId)) {
-                userLikes.push(userId); // Ensure userLikes is an array of strings
-            }
-        } else {
-            if (userLikes.includes(userId)) {
-                userLikes.splice(userLikes.indexOf(userId), 1);
-            }
-        }
-    
-        await updateLikesOnPost(data.id, userLikes, isVal ? likesInfo.likes + 1 : likesInfo.likes - 1);
+
+        const updatedUserLikes = isVal
+            ? [...userLikes, userId]
+            : userLikes.filter((id) => id !== userId);
+
+        await updateLikesOnPost(data.id, updatedUserLikes, updatedLikes);
     };
-    
-    
 
     return (
         <Card className="mb-6">
@@ -56,6 +46,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                         <img
                             src="https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg"
                             className="w-10 h-10 rounded-full border-2 border-slate-800 object-cover"
+                            alt="User profile"
                         />
                     </span>
                     <span>Guest User</span>
