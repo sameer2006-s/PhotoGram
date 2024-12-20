@@ -27,7 +27,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const updateLike = async (isVal: boolean) => {
         setLikesInfo({
             likes: isVal ? likesInfo.likes + 1 : likesInfo.likes - 1,
-            isLike: !likesInfo.isLike,
+            isLike: likesInfo.isLike,
         });
     
         // Explicitly define userLikes as string array
