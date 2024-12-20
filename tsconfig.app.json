@@ -19,5 +19,5 @@
     "noUnusedParameters": false, // Set to false to ignore unused parameters
     "noFallthroughCasesInSwitch": true, // Keeping this for safety
   },
- // "include": ["src"]
+  //"include": ["src"]
 }
