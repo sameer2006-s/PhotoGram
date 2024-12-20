@@ -25,7 +25,7 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
         
         return (
           <div className="flex flex-col items-center justify-center w-full">
-            {data.map((post) => (
+               {data.map((post) => (
               <PostCard key={post.id} data={post} />
               
             ))}
@@ -81,6 +81,7 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
                 </div>
                 <div className='mb-5 overflow-y-auto'>
                     <h2 className='mb-5'>Stories</h2>
+                    kareeeeeeeeeeeeeeem
                     <Stories/>
                 </div>
                 <div className='mb-5 flex justify-center '>

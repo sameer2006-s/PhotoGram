@@ -12,31 +12,43 @@ interface IPostCardProps {
 
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const { user } = useUserAuth();
-    const userId: string = user?.uid ?? ''; // Safely handle null or undefined
-    const userLikes: string[] = data.userLikes || []; // Ensure default is an empty array
-    
+    const userLikes: string[] = data.userLikes ?? [];
+
     const [likesInfo, setLikesInfo] = React.useState<{
         likes: number;
         isLike: boolean;
     }>({
         likes: data.likes ?? 0, // Ensure default value is handled
-        isLike: userLikes.includes(userId), // Check if the user has already liked
+        isLike:  userLikes.includes(user.uid as string)? true : false, // Cast userId to string
     });
 
+    
+
+
     const updateLike = async (isVal: boolean) => {
-        const updatedLikes = isVal ? likesInfo.likes + 1 : likesInfo.likes - 1;
-        
+    
+
+
+        console.log(user.uid);
+
         setLikesInfo({
-            likes: updatedLikes,
-            isLike: !likesInfo.isLike, // Toggle like state
+            likes: isVal ? likesInfo.likes + 1 : likesInfo.likes - 1,
+            isLike: !likesInfo.isLike,
         });
 
-        const updatedUserLikes = isVal
-            ? [...userLikes, userId]
-            : userLikes.filter((id) => id !== userId);
 
-        await updateLikesOnPost(data.id, updatedUserLikes, updatedLikes);
+        if (isVal) {
+                userLikes.push(user.uid); 
+            
+        } else {
+                userLikes.splice(userLikes.indexOf(user.uid), 1);
+            
+        }
+
+        await updateLikesOnPost(data.id, userLikes, isVal ? likesInfo.likes + 1 : likesInfo.likes - 1);
     };
+
+
 
     return (
         <Card className="mb-6">
@@ -46,7 +58,6 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                         <img
                             src="https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg"
                             className="w-10 h-10 rounded-full border-2 border-slate-800 object-cover"
-                            alt="User profile"
                         />
                     </span>
                     <span>Guest User</span>
@@ -59,14 +70,22 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                 <div className="flex justify-between w-full mb-3">
                     <HeartIcon
                         className={cn('mr-3', 'cursor-pointer', likesInfo.isLike ? 'fill-red-500' : '')}
-                        onClick={() => updateLike(!likesInfo.isLike)}
+                        onClick={() => {
+                           // alert(`You have  this post!`);
+
+                            
+                            console.log("a7aaa")
+                            updateLike(!likesInfo.isLike)
+                        }
+                        }
                     />
                     <MessageCircle className="mr-3" />
                 </div>
                 <div className="w-full text-sm block">{likesInfo.likes} Likes</div>
                 <div className="w-full text-sm block">
-                    <span>Guest User: {data.caption}</span>
+                    <span>Guest: {data.caption}</span>
                 </div>
+               
             </CardFooter>
         </Card>
     );

@@ -8,9 +8,9 @@ export default defineConfig({
     sourcemap: true, // Useful for debugging issues on Vercel
   },
   plugins: [react()],
-  // resolve: {
-  //   alias: {
-  //     "@": path.resolve(__dirname, "./src"),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 })

@@ -25,6 +25,9 @@ const CreatePost : React.FunctionComponent <ICreatePostProps> = (props)=>{
     const [imageUrl, setImageUrl] = React.useState<string | null>(null);
     const [imageMeta, setImageMeta] = React.useState<PhotoMeta | null>(null);
     const [post,setPost]=React.useState<Post>({caption:'',photos:[],likes:0,userLikes:[],userId:null,date:new Date()})
+    React.useEffect(() => {
+      console.log(user);
+    }, []);
 
     const handleFileUpload = (file: any) => {
         console.log('File data:', file.allentries);

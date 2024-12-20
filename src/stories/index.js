@@ -1,5 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-const Stories = (props) => {
-    return _jsxs("div", { className: 'flex justify-between', children: [_jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' }), _jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' }), _jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' }), _jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' }), _jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' }), _jsx("img", { src: 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg', className: 'w-20 h-20 rounded-full border-4 border-slate-300 ' })] });
-};
-export default Stories;

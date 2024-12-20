@@ -48,7 +48,7 @@ export const UserAuthProvider :React.FunctionComponent<IUserAuthProviderProps>= 
             }
         })
         return ()=>{unsubscribe()}
-    })
+    },[])
     const value :AuthContextData = {
         user,
         logIn,
