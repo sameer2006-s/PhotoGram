@@ -24,20 +24,20 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     });
 
     React.useEffect(() => {
-        if (user?.uid) {
-            const fetchUserLikes = async () => {
-                const likes = await getUserLikes(userId); // Fetch the user's liked posts
-                setUserLikes(likes);  // Update the userLikes state
-                
-                // Check and update likesInfo based on the fetched user likes
-                setLikesInfo({
-                    likes: data.likes ?? 0,
-                    isLike: likes.includes(userId), // Reset isLike based on current user
-                });
-            };
-            fetchUserLikes(); // Call the fetchUserLikes function
-        }
-    }, [user, userId, data.likes]); // Dependencies
+    if (user?.uid) {
+        const fetchUserLikes = async () => {
+            const likes = await getUserLikes(userId); // Fetch the user's liked posts
+            setUserLikes(likes);  // Update the userLikes state
+            
+            // Check and update likesInfo based on the fetched user likes
+            setLikesInfo({
+                likes: data.likes ?? 0,
+                isLike: likes.includes(userId), // Reset isLike based on current user
+            });
+        };
+        fetchUserLikes(); // Call the fetchUserLikes function
+    }
+}, [user, userId, data.likes]); // Dependencies
 
     const updateLike = async (isVal: boolean) => {
         const updatedLikes = isVal ? likesInfo.likes + 1 : likesInfo.likes - 1;
