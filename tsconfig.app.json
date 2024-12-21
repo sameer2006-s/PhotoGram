@@ -19,5 +19,7 @@
     "noUnusedParameters": false, // Set to false to ignore unused parameters
     "noFallthroughCasesInSwitch": true, // Keeping this for safety
   },
+  "include": ["src/**/*.tsx", "src/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules", "vite-env.d.ts"]
   //"include": ["src"]
 }

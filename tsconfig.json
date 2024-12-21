@@ -14,24 +14,21 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "paths": {
-     "@/*": ["src/*"],
-     "@pages/*": ["src/pages/*"]
+      "@/*": ["src/*"],
+      "@pages/*": ["src/pages/*"]
     },
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "incremental": true
+    "incremental": true,
+    "composite": true
   },
-  "include": ["src/**/*.tsx","src/**/*.ts", "vite.config.ts"],
+  "include": ["src/**/*.tsx", "src/**/*.ts", "vite.config.ts"],
   "exclude": ["node_modules", "vite-env.d.ts"],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
