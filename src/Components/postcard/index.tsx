@@ -65,13 +65,13 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     
 
     React.useEffect(() => {
-        console.log(PostUserId)
+       // console.log(PostUserId)
         fetchUserInfo()
 
     }, []);
 
     React.useEffect(() => {
-        console.log("userInfo from db",PostUserInfo)
+       // console.log("userInfo from db",PostUserInfo)
     }, [PostUserInfo]);
 
 
@@ -108,7 +108,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                 </div>
                 <div className="w-full text-sm block">{likesInfo.likes} Likes</div>
                 <div className="w-full text-sm block">
-                    <span>Guest: {data.caption}</span>
+                    <span>{PostUserInfo.displayName}: {data.caption}</span>
                 </div>
                
             </CardFooter>

@@ -5,9 +5,10 @@ import { Input } from '../../Components/ui/input';
 import { HeartIcon, SearchIcon } from 'lucide-react';
 import Stories from '../../stories';
 import { useUserAuth } from '../../context/userAuthContext';
-import { getPosts, getUserInfo } from '../../repository/post.service';
+import { createUserInfo, getPosts, getUserInfo } from '../../repository/post.service';
 import { DocRes, Post } from '../../types';
 import PostCard from '../../Components/postcard';
+import { create } from 'domain';
 
 interface IHomeProps  {
 
@@ -16,6 +17,7 @@ interface IHomeProps  {
 const Home : React.FunctionComponent <IHomeProps> = ()=>{
     const {user}= useUserAuth()
     const [data,setData] = React.useState<DocRes[]>([])
+    const [userInfo, SetUserInfo] = React.useState<any>({})
     const [email, setEmail] = React.useState<string | null>(null);
 
     
@@ -68,16 +70,38 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
 
     const fetchUserInfo = async()=>{
         const userData= await getUserInfo(user?.uid as string)
+        const userInfo= userData.data()
+
+        if(userInfo==null){
+            console.log("user info was null")
+            createUserInfo(user?.uid as string,{
+                userEmail: user.email || "",
+                userId: user.uid,
+                displayName: user.displayName || "Guest",
+                photoURL: user.photoURL || "",
+                userBio: "Please add your Bio",})
+                const userData= await getUserInfo(user?.uid as string)
+                SetUserInfo (userData.data())
+                console.log("user info created",userInfo)
+        
+
+        }else{
+            console.log("user already exists")
+
+        }
+
        //console.log("userInfo from db:",userInfo)
        //console.log(userInfo.photoURL)
-       const userInfo= userData.data()
-       console.log("userInfo from db",userInfo)
     }
 
     React.useEffect(()=>{
         handlePostsCall()
         fetchUserInfo()
     },[])
+
+    React.useEffect(()=>{
+        console.log("userData from db",userInfo)
+    },[userInfo])
 
     return <div>
         <Layout>
