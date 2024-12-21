@@ -4,7 +4,7 @@ import { useUserAuth } from '../../context/userAuthContext';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { HeartIcon, MessageCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { updateLikesOnPost } from '../../repository/post.service';
+import { getUserInfo, updateLikesOnPost } from '../../repository/post.service';
 
 interface IPostCardProps {
     data: DocRes;
@@ -13,6 +13,8 @@ interface IPostCardProps {
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     const { user } = useUserAuth();
     const userLikes: string[] = data.userLikes ?? [];
+    const PostUserId = data.userId;
+    const [PostUserInfo, setPostUserInfo] = React.useState<any>({})
 
     const [likesInfo, setLikesInfo] = React.useState<{
         likes: number;
@@ -47,7 +49,30 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
 
         await updateLikesOnPost(data.id, userLikes, isVal ? likesInfo.likes + 1 : likesInfo.likes - 1);
     };
+    
+    const fetchUserInfo = async () => {
+        try {
+            const postUserData = await getUserInfo(PostUserId as string);
+            if (postUserData.exists()) {
+                setPostUserInfo(postUserData.data());
+            } else {
+                console.warn("User data not found for PostUserId:", PostUserId);
+            }
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+        }
+    };
+    
 
+    React.useEffect(() => {
+        console.log(PostUserId)
+        fetchUserInfo()
+
+    }, []);
+
+    React.useEffect(() => {
+        console.log("userInfo from db",PostUserInfo)
+    }, [PostUserInfo]);
 
 
     return (
@@ -56,11 +81,11 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
                 <CardTitle className="text-sm text-center flex justify-start items-center">
                     <span className="mr-2">
                         <img
-                            src="https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg"
+                            src={PostUserInfo?.photoURL || 'https://pbs.twimg.com/media/GRgh9_waAAABgj8.jpg'}
                             className="w-10 h-10 rounded-full border-2 border-slate-800 object-cover"
                         />
                     </span>
-                    <span>Guest User</span>
+                    <span>{PostUserInfo?.displayName||"couldnt fetch"}</span>
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-0">

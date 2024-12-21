@@ -4,13 +4,14 @@ import { Button } from '../../Components/ui/button';
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../../Components/ui/input';
 //import { Icons } from '../../Components/ui/icons';
-import { UserSignIn } from '../../types';
+import { UserProfile, UserSignIn } from '../../types';
 import { useUserAuth } from '../../context/userAuthContext';
 import { Icons } from '../../Components/ui/icons';
 //import { userInfo } from 'os';
 import { Link,useNavigate } from 'react-router-dom';
 import { auth } from '../../firebaseConfig';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { createUserInfo } from '../../repository/post.service';
 
 
 
@@ -35,10 +36,18 @@ const navigate = useNavigate();
 const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>,userInfo:UserSignIn)=>{
   e.preventDefault();
   try {
-   // console.log("User info before sign-up:", userInfo);
-    await signUp(userInfo.email,userInfo.password)
-   // console.log("User created successfully:");
-   // console.log("User info after sign-up:", userInfo);
+    const result = await signUp(userInfo.email,userInfo.password)
+    const user = result.user;
+    const userInfoDb:UserProfile = {
+      userEmail: user.email || "",
+      userId: user.uid,
+      displayName: user.displayName || "Guest",
+      photoURL: user.photoURL || "",
+      userBio: "Please add your Bio",
+    }
+   await  createUserInfo(user.uid,userInfoDb)
+
+   
     navigate("/home")
   } catch (error) {
     console.log(error);
@@ -51,6 +60,15 @@ const handleGoogleSignIn=async(e:React.MouseEvent<HTMLButtonElement>)=>{
     const result = await googleSignIn();
     console.log(result)
     console.log("Google Sign-In Success:", result.user);
+    const user = result.user;
+    const userInfoDb:UserProfile = {
+      userEmail: user.email || "",
+      userId: user.uid,
+      displayName: user.displayName || "Guest",
+      photoURL: user.photoURL || "",
+      userBio: "Please add your Bio",
+    }
+    createUserInfo(user.uid,userInfoDb)
     navigate("/Home")
 } catch (error) {
     console.error("Google Sign-In Error:", error);

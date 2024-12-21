@@ -5,7 +5,7 @@ import { Input } from '../../Components/ui/input';
 import { HeartIcon, SearchIcon } from 'lucide-react';
 import Stories from '../../stories';
 import { useUserAuth } from '../../context/userAuthContext';
-import { getPosts } from '../../repository/post.service';
+import { getPosts, getUserInfo } from '../../repository/post.service';
 import { DocRes, Post } from '../../types';
 import PostCard from '../../Components/postcard';
 
@@ -21,7 +21,7 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
     
 
     const renderPosts = () => {
-        console.log(data[0])
+        //console.log(data[0])
         
         return (
           <div className="flex flex-col items-center justify-center w-full">
@@ -36,12 +36,12 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
     
     const handlePostsCall = async()=>{
         try {
-            console.log("user:",user)
+           // console.log("user:",user)
             const querySnapshot = await getPosts()
             const tempArr:DocRes[] = [];
-            console.log(querySnapshot)
+           // console.log(querySnapshot)
             if(querySnapshot.size>0){
-                console.log("2")
+                //console.log("2")
 
                 querySnapshot.forEach((doc)=>{
                     const data = doc.data()as Post
@@ -49,9 +49,9 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
                         id:doc.id,
                         ...data
                     }
-                    console.log("3")
+                   // console.log("3")
 
-                    console.log("resObj:",resObj)
+                   // console.log("resObj:",resObj)
                     tempArr.push(resObj)
 
                     
@@ -59,15 +59,24 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
             }
 
             setData(tempArr)
-            console.log("tempArr",tempArr)
+            //console.log("tempArr",tempArr)
 
         } catch (error) {
             console.log(error)
         }
     }
 
+    const fetchUserInfo = async()=>{
+        const userData= await getUserInfo(user?.uid as string)
+       //console.log("userInfo from db:",userInfo)
+       //console.log(userInfo.photoURL)
+       const userInfo= userData.data()
+       console.log("userInfo from db",userInfo)
+    }
+
     React.useEffect(()=>{
         handlePostsCall()
+        fetchUserInfo()
     },[])
 
     return <div>
@@ -81,7 +90,6 @@ const Home : React.FunctionComponent <IHomeProps> = ()=>{
                 </div>
                 <div className='mb-5 overflow-y-auto'>
                     <h2 className='mb-5'>Stories</h2>
-                    kareeeeeeeeeeeeeeem
                     <Stories/>
                 </div>
                 <div className='mb-5 flex justify-center '>

@@ -10,6 +10,7 @@ import ProtectedRoutes from './Components/ProtectedRoutes'
 import ErrorBoundary from "./ErrorBoundary";
 import  Layout  from "./Components/layout";
 import CreatePost from "./pages/post";
+import EditProfile from "./pages/profile/editProfile";
 
 
 
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
             {
                 path:"/profile",
                 element:<Profile/>,
+                errorElement:<Error/>
+            },
+            {
+                path:"/edit-profile",
+                element:<EditProfile/>,
                 errorElement:<Error/>
             },
         ]

@@ -43,3 +43,19 @@ export interface ProfilInfo {
     photoURL?:string,
     displayName? :string
 }
+
+export interface UserProfile{
+    userId?:string,
+    displayName?:string,
+    photoURL?:string,
+    userBio?:string,
+    userEmail?:string,
+
+}
+export interface ProfileRes{
+    id?:string,
+    userId?:string,
+    displayName?:string,
+    photoURL?:string,
+    userBio?:string,
+}
