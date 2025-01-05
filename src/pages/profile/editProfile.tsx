@@ -92,7 +92,7 @@ const EditProfile : React.FunctionComponent <IEditProfileProps> = (props)=>{
                     <form onSubmit={(e)=>handleSubmit(e)}>
                         <div className='flex flex-col'>
                             <Label className='mb-4' htmlFor=''>Profile Picture</Label>
-                            <div><img src={userInfo.photoURL?userInfo.photoURL:""}></img></div>
+                            <div><img className="max-w-70 max-h-64"src={userInfo.photoURL?userInfo.photoURL:""}></img></div>
                             <FileUploaderRegular
                                     classNameUploader="uc-light"
                                     pubkey="8d1814c97e59c361751a"
@@ -105,7 +105,7 @@ const EditProfile : React.FunctionComponent <IEditProfileProps> = (props)=>{
                                     <img
                                     src={userInfo.photoURL}
                                     alt="Uploaded"
-                                    className="w-full max-h-64 object-cover border"
+                                    className="max-w-70 max-h-64 object-cover border"
                                     />
                                 </div>
                                 )}
@@ -136,7 +136,7 @@ const EditProfile : React.FunctionComponent <IEditProfileProps> = (props)=>{
                     </form>
                 </div>
             </div>
-            <button onClick={()=>{console.log(userInfo)}} className='mt-2 w-32 bg-red-600 text-white'>fkn bitch  this is a late state error  </button>
+           
         </div>
     </Layout>
 </div>;

@@ -94,7 +94,7 @@ const CreatePost : React.FunctionComponent <ICreatePostProps> = (props)=>{
                                             <img
                                             src={imageUrl}
                                             alt="Uploaded"
-                                            className="w-full max-h-64 object-cover border"
+                                            className="max-w-70 max-h-64 object-cover border"
                                             />
                                         </div>
                                         )}
