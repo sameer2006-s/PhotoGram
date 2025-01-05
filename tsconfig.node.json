@@ -1,4 +1,5 @@
 {
+  
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
@@ -23,5 +24,6 @@
       "@pages/*": ["src/pages/*"]
     }
   },
+
   //"include": ["vite.config.ts"]
 }
